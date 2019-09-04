@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 th:text="${message}">hello world</h1>
+
+<p th:text="${username}">username</p>
+<p th:text="'welcome'+${username}" >welcome xxxx</p>
+<!--简洁写法-->
+<p th:text="|welcome ${username}|" >welcome xxxx</p>
+
+
+
+<p th:if="${flag=='yes'}">flag==yes</p>
+<!--条件不成立才展示-->
+<p th:unless="${flag=='yes'}">flag==no</p>
+
+<table>
+    <!--
+       user  循环中每次循环的对象
+       iterStat  状态变量
+          index  下标
+          count  index+1
+          size   被迭代的对象的大小
+          first  是否是第一个
+          last   是否是最后一个
+          even/odd   判断当前循环是否为奇数或者偶数
+          <c:foreach items="${users}" var="user" >
+            ${user.name}
+          </c>
+    -->
+
+    <tr th:each="user,iterStat:${users}">
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${iterStat.index}"></td>
+    </tr>
+
+    <!--<a href="http://www.baidu.com">百度</a>-->
+
+
+
+</table>
+
+
+<!--url-->
+<a th:href="@{http://www.baidu.com}">百度</a>
+<a th:href="@{/url}">url</a>
+
+
+
+<!--三目运算-->
+<input th:value="${name}">
+<!--
+  gt  大于  greater than
+  ge  大于等于   greater equal
+  eq  等于   equal
+  lt  小于  less than
+  le
+  ne        not equal
+-->
+<input th:value="${age gt 30 ? '中年':'年轻人'}">
+
+
+
+<!--switch-->
+<div th:switch="${gender}">
+    <p th:case="'man'">男的</p>
+    <p th:case="'woman'">女的</p>
+    <!--*  默认选项  -->
+    <p th:case="*">未知的</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
